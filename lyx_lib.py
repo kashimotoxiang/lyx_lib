@@ -1,7 +1,5 @@
-import signal
 import multiprocessing
 import pickle
-
 
 
 def concate_list(list):
