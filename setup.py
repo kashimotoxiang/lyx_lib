@@ -10,8 +10,8 @@ https://github.com/pypa/sampleproject
 from setuptools import setup, find_packages
 
 setup(
-    name='lyx-lib',
-    version='0.2',
+    name='lyx',
+    version='0.2.1',
     description=('common code snippets created by kashimotoxiang'),
     long_description=('common code snippets created by kashimotoxiang'),
     author='kashimotoxiang',

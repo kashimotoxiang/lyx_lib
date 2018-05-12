@@ -1,6 +1,6 @@
 Metadata-Version: 1.2
-Name: lyx-lib
-Version: 0.2
+Name: lyx
+Version: 0.2.1
 Summary: common code snippets created by kashimotoxiang
 Home-page: https://github.com/kashimotoxiang/lyx_lib
 Author: kashimotoxiang
