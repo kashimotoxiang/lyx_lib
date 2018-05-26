@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import multiprocessing
 import pickle
 
@@ -23,3 +24,9 @@ def save_pkl(obj, name):
 def load_pkl(name):
     with open(name + '.pkl', 'rb') as f:
         return pickle.load(f)
+
+
+def read_all_lines(filepath):
+    with open(filepath, 'r', encoding='utf-8') as f:
+        result =[x.strip() for x in f.readlines()]
+    return result

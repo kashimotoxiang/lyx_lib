@@ -1,5 +1,14 @@
+# -*- coding: utf-8 -*-
+
 import re
 from functools import reduce
+
+import unicodedata
+import sys
+
+tbl = {i:' ' for i in range(sys.maxunicode)
+                    if unicodedata.category(chr(i)).startswith('P')}
+
 
 
 def re_spilt(data, re_rule):
@@ -17,9 +26,9 @@ def check_contain_cn(check_str):
     return False
 
 
-def check_ALL_en(check_str):
+def check_all_en(check_str):
     check_bool = list(map(lambda x: ord(x) < 127, check_str))
-    result = reduce(lambda x, y: x and y, check_bool)
+    result = all(check_bool)
     return result
 
 
@@ -55,6 +64,38 @@ def re_get_all(re_rule, data):
         print(e)
 
 
-def replace_all_dict(dict, data):
+def replace_all_dict(data, dict):
     for k, v in dict.items():
         data = data.replace(k, v)
+    return data
+
+
+def remove_all(str, remover):
+    if remover is not None:
+        for item in remover:
+            str = str.replace(item, '')
+    return str
+
+
+def count_cn(check_str):
+    if check_str is None:
+        return 0
+    check_bool = list(map(lambda x: u'\u4e00' <= x <= u'\u9fff', check_str))
+    true_num = check_bool.count(True)
+    return true_num
+
+
+def count_en(check_str):
+    if check_str is None:
+        return 0
+    check_bool = list(map(lambda x: ord(x) < 127, check_str))
+    true_num = check_bool.count(True)
+    return true_num
+
+
+def remove_punctuation(text):
+    return text.translate(tbl)
+
+
+def re_remove(re_rule, data):
+    return re_rule.sub('', data)

@@ -1,5 +1,0 @@
-setup.py
-lyx.egg-info/PKG-INFO
-lyx.egg-info/SOURCES.txt
-lyx.egg-info/dependency_links.txt
-lyx.egg-info/top_level.txt

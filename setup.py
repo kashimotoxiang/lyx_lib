@@ -11,7 +11,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='lyx',
-    version='0.2.1',
+    version='0.2.7',
     description=('common code snippets created by kashimotoxiang'),
     long_description=('common code snippets created by kashimotoxiang'),
     author='kashimotoxiang',
