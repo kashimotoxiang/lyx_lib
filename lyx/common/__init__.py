@@ -1,12 +1,22 @@
 # -*- coding: utf-8 -*-
 import multiprocessing
-import pickle
+import time
+
+from datetime import datetime
 
 
-def concate_list(list):
-    result = []
-    for element in list:
-        result += element
+class lazy(object):
+    def __init__(self, func):
+        self.func = func
+
+    def __get__(self, instance, cls):
+        val = self.func(instance)
+        setattr(instance, self.func.__name__, val)
+        return val
+
+
+def concate_list(totallist):
+    result = [x for sublist in totallist for x in sublist]
     return result
 
 
@@ -16,17 +26,21 @@ def mp_map(func, data):
         return result
 
 
-def save_pkl(obj, name):
-    with open(name + '.pkl', 'wb') as f:
-        pickle.dump(obj, f, pickle.HIGHEST_PROTOCOL)
+def timestamp():
+    return str(int(time.mktime(datetime.now().timetuple())))
 
 
-def load_pkl(name):
-    with open(name + '.pkl', 'rb') as f:
-        return pickle.load(f)
-
-
-def read_all_lines(filepath):
-    with open(filepath, 'r', encoding='utf-8') as f:
-        result =[x.strip() for x in f.readlines()]
+def valid_list(__list):
+    result = [x for x in __list if x]
     return result
+
+
+def timeit(f):
+    def timed(*args, **kw):
+        ts = time.time()
+        result = f(*args, **kw)
+        te = time.time()
+        print('func:%r took: %2.4f sec' % (f.__name__, te - ts))
+        return result
+
+    return timed
