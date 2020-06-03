@@ -1,8 +1,77 @@
+import json
+
+
 class TreeNode(object):
     def __init__(self, x):
         self.val = x
         self.left = None
         self.right = None
+
+
+class ListNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
+
+def stringToIntegerList(input):
+    return json.loads(input)
+
+
+def stringToListNode(input):
+    # Generate list from the input
+    numbers = stringToIntegerList(input)
+
+    # Now convert that list into linked list
+    dummyRoot = ListNode(0)
+    ptr = dummyRoot
+    for number in numbers:
+        ptr.next = ListNode(number)
+        ptr = ptr.next
+
+    ptr = dummyRoot.next
+    return ptr
+
+
+def integerListToString(nums, len_of_list=None):
+    if not len_of_list:
+        len_of_list = len(nums)
+    return json.dumps(nums[:len_of_list])
+
+
+def listNodeToString(node):
+    if not node:
+        return "[]"
+
+    result = ""
+    while node:
+        result += str(node.val) + ", "
+        node = node.next
+    return "[" + result[:-2] + "]"
+
+
+def stringToBool(input):
+    return json.dumps(input)
+
+
+def treeNodeToString(root):
+    if not root:
+        return "[]"
+    output = ""
+    queue = [root]
+    current = 0
+    while current != len(queue):
+        node = queue[current]
+        current = current + 1
+
+        if not node:
+            output += "null, "
+            continue
+
+        output += str(node.val) + ", "
+        queue.append(node.left)
+        queue.append(node.right)
+    return "[" + output[:-2] + "]"
 
 
 def stringToTreeNode(input):
@@ -39,52 +108,34 @@ def stringToTreeNode(input):
     return root
 
 
-def stringToInt(input):
-    return int(input)
+def stringToString(input):
+    import json
+
+    return json.loads(input)
 
 
-def treeNodeToString(root):
-    if not root:
-        return "[]"
-    output = ""
-    queue = [root]
-    current = 0
-    while current != len(queue):
-        node = queue[current]
-        current = current + 1
+def prettyPrintTree(node, prefix="", isLeft=True):
+    if not node:
+        print("Empty Tree")
+        return
 
-        if not node:
-            output += "null, "
-            continue
+    if node.right:
+        prettyPrintTree(node.right, prefix + ("│   " if isLeft else "    "),
+                        False)
 
-        output += str(node.val) + ", "
-        queue.append(node.left)
-        queue.append(node.right)
-    return "[" + output[:-2] + "]"
+    print(prefix + ("└── " if isLeft else "┌── ") + str(node.val))
+
+    if node.left:
+        prettyPrintTree(node.left, prefix + ("    " if isLeft else "│   "),
+                        True)
 
 
-class ListNode(object):
-    def __init__(self, x):
-        self.val = x
-        self.next = None
+def prettyPrintLinkedList(node):
+    while node and node.next:
+        print(str(node.val) + "->", end='')
+        node = node.next
 
-
-def ListToListNode(input):
-    # Now convert that list into linked list
-    dummyRoot = ListNode(0)
-    ptr = dummyRoot
-    for number in input:
-        ptr.next = ListNode(number)
-        ptr = ptr.next
-
-    ptr = dummyRoot.next
-    return ptr
-
-
-def printLinkedList(head):
-    cur = head
-    res = []
-    while(cur):
-        res.append(cur.val)
-        cur = cur.next
-    print(", ".join(res))
+    if node:
+        print(node.val)
+    else:
+        print("Empty LinkedList")
