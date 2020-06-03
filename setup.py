@@ -1,5 +1,4 @@
 # coding=utf-8
-
 """A setuptools based setup module.
 See:
 https://packaging.python.org/en/latest/distributing.html
@@ -7,11 +6,11 @@ https://github.com/pypa/sampleproject
 """
 
 # Always prefer setuptools over distutils
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 
 setup(
     name='lyx',
-    version='0.4.0',
+    version='0.6.0',
     description=('common code snippets created by kashimotoxiang'),
     long_description=('common code snippets created by kashimotoxiang'),
     author='kashimotoxiang',

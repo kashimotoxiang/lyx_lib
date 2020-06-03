@@ -1,8 +1,9 @@
-# -*- coding: utf-8 -*-
-import joblib
-import pickle
-import os
 import csv
+import json
+import os
+import pickle
+
+import joblib
 
 
 def save_pkl(obj, name):
@@ -44,14 +45,16 @@ def write_all(data, filepath):
 
 def get_all_file(Folder_Path, filetypes):
     filespath = []
-    for dirpath, dirs, files in os.walk(Folder_Path):  # 递归遍历当前目录和所有子目录的文件和目录
+    for dirpath, _, files in os.walk(Folder_Path):  # 递归遍历当前目录和所有子目录的文件和目录
         for name in files:  # files保存的是所有的文件名
             if filetypes is None:
-                filename = os.path.join(dirpath, name)  # 加上路径，dirpath是遍历时文件对应的路径
+                # 加上路径，dirpath是遍历时文件对应的路径
+                filename = os.path.join(dirpath, name)
                 filespath.append(filename)
             else:
                 if os.path.splitext(name)[1] in filetypes:
-                    filename = os.path.join(dirpath, name)  # 加上路径，dirpath是遍历时文件对应的路径
+                    # 加上路径，dirpath是遍历时文件对应的路径
+                    filename = os.path.join(dirpath, name)
                     filespath.append(filename)
     return filespath
 
@@ -111,3 +114,14 @@ def read_csv_tuple(filename, __fileds=None, slice=None):
                 row = row[slice]
             result.append(row)
     return result
+
+
+def read_json(filename):
+    with open(filename, 'w') as f:
+        data = json.load(f)
+    return data
+
+
+def write_json(filename, data):
+    with open(filename, 'w') as f:
+        json.dump(data, f)

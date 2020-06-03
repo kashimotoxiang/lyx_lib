@@ -3,6 +3,7 @@
 import re
 import sys
 import unicodedata
+
 tbl = {i: ' ' for i in range(sys.maxunicode)
        if unicodedata.category(chr(i)).startswith('P')}
 
@@ -117,8 +118,6 @@ def separate(i_contents):
     '''
     内容分离
     '''
-    flag = 0  # 0-英文；1-中文
-    o_contents = ['']
     cn, en = None, None
     for i in range(0, len(i_contents)):
         str = i_contents[i]
@@ -128,73 +127,3 @@ def separate(i_contents):
             break
 
     return en, cn
-
-
-def auto_up_down_case(contents, mode):
-    '''
-    智能大小写转换
-    全大写的缩写词保持不变
-    一般单词的首字母变成小写
-    '''
-    # mode = 1中-英; 其他英-中
-    if(mode == 1):
-        index = 1
-    else:
-        index = 0
-
-    o_contents = ['']
-
-    try:
-        contents = contents.split("\n")
-        for line in contents:
-            words = line.split("\t")
-            if (len(words) != 2):
-                continue
-            if(mode == 1):
-                cn = words[0][::-1]
-                en = words[1][::-1]
-            else:
-                cn = words[1]
-                en = words[0]
-
-            first_letter = en[0]
-            second_letter = en[1]
-
-            if (is_up_case_and_symbol(first_letter) & ~is_up_case_and_symbol(second_letter)):
-                en = en.lower()
-
-            # 文档错误修复
-            def _char_detect(str, i, ch):
-                if(str[i] == ch):
-                    return True
-                else:
-                    return False
-
-            if(_char_detect(en, -1, '(')):
-                en = en[0:-1]
-                cn = '(' + cn
-
-            if(_char_detect(en, -1, '-')):
-                en = en[0:-1]
-
-            if(_char_detect(en, -1, ':')):
-                en = en[0:-1]
-
-            if(_char_detect(cn, 0, '：')):
-                cn = cn[1:]
-
-            def csv_foramteor(strs):
-                nonlocal o_contents
-                for i in strs:
-                    o_contents.append(i)
-                    # o_contents.append('\t')
-                o_contents.append('\n')
-                # return o_contents
-
-            csv_foramteor([en, '\t', cn])
-            # o_contents.append(tmp)
-
-    except IndexError:
-        print("auto_up_down_case NameError")
-
-    return ''.join(o_contents)

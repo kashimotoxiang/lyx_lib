@@ -1,8 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# LAZY PROPERTY EVALUATION
-
-
 class Lazy(object):
     def __init__(self, calculate_function):
         self._calculate = calculate_function

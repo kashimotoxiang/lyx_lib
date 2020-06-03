@@ -1,7 +1,4 @@
-# -*- coding: utf-8 -*-
-
 def log(data, filename, stop=False, table_head=None):
-
     with open(filename, 'w', encoding='utf-8') as f:
         # write markdown header
         if table_head:
@@ -23,7 +20,7 @@ def log(data, filename, stop=False, table_head=None):
                     f.write('|')
 
                 for element in item:
-                    f.write(str(element)+'\t')
+                    f.write(str(element) + '\t')
                     # write markdown splitter
                     if table_head:
                         f.write('|\t')
