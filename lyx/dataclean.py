@@ -8,11 +8,6 @@ tbl = {i: ' ' for i in range(sys.maxunicode)
        if unicodedata.category(chr(i)).startswith('P')}
 
 
-class Safedict(dict):
-    def __missing__(self, key):
-        return key
-
-
 def re_spilt(data, re_rule):
     # re_rule=r'[\s\/\\\:]'
     result = re.split(re_rule, data)

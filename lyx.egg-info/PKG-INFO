@@ -1,18 +1,18 @@
 Metadata-Version: 1.2
 Name: lyx
-Version: 0.6.0
-Summary: common code snippets created by kashimotoxiang
+Version: 0.7.1
+Summary: python toolbox created by kashimotoxiang
 Home-page: https://github.com/kashimotoxiang/lyx_lib
 Author: kashimotoxiang
-Author-email: kashimotoxiang@outlook.com
+Author-email: kashimotoxiang@gmail.com
 Maintainer: kashimotoxiang
-Maintainer-email: kashimotoxiang@outlook.com
+Maintainer-email: kashimotoxiang@gmail.com
 License: MIT
-Description: common code snippets created by kashimotoxiang
+Description: python toolbox created by kashimotoxiang
 Platform: all
 Classifier: Development Status :: 3 - Alpha
 Classifier: Intended Audience :: Developers
 Classifier: Topic :: Software Development :: Build Tools
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Programming Language :: Python :: 3
-Requires-Python: >=3
+Requires-Python: >=3.7

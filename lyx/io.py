@@ -2,14 +2,12 @@ import csv
 import json
 import os
 import pickle
-
 import joblib
 
 
 def save_pkl(obj, name):
     with open(name + '.pkl', 'wb') as f:
         joblib.dump(obj, f, protocol=pickle.HIGHEST_PROTOCOL)
-        # joblib.dump(obj, f)
 
 
 def load_pkl(name):
@@ -17,7 +15,7 @@ def load_pkl(name):
         return joblib.load(f)
 
 
-def read_all_lines(filepath):
+def read_all(filepath):
     with open(filepath, 'r', encoding='utf-8') as f:
         result = [x.strip() for x in f.readlines()]
     return result
@@ -59,30 +57,21 @@ def get_all_file(Folder_Path, filetypes):
     return filespath
 
 
-def write_dict_csv(filepath, content, fieldnames):
-    folder = os.path.dirname(filepath)
-    if len(folder) != 0:
-        if not os.path.exists(folder):
-            os.makedirs(folder)
-    with open(filepath, 'w') as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(content)
-
-
-def write_all_csv(filepath, content, header=None, trans=False):
+def write_dict(filepath, content, fieldnames=None, header=None):
     folder = os.path.dirname(filepath)
     if len(folder) != 0:
         if not os.path.exists(folder):
             os.makedirs(folder)
 
     with open(filepath, 'w', encoding='utf-8') as csvFile:
-        writer = csv.writer(csvFile)
-        if header:
-            writer.writerow(header)
-        if trans:
-            writer.writerows(zip(*content))
-        else:
+        if isinstance(content, dict):
+            writer = csv.DictWriter(csvFile, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(content)
+        elif isinstance(content, list):
+            writer = csv.writer(csvFile)
+            if header:
+                writer.writerow(header)
             writer.writerows(content)
 
 

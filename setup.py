@@ -10,21 +10,20 @@ from setuptools import find_packages, setup
 
 setup(
     name='lyx',
-    version='0.6.0',
-    description=('common code snippets created by kashimotoxiang'),
-    long_description=('common code snippets created by kashimotoxiang'),
+    version='0.7.1',
+    description=('python toolbox created by kashimotoxiang'),
+    long_description=('python toolbox created by kashimotoxiang'),
     author='kashimotoxiang',
-    author_email='kashimotoxiang@outlook.com',
+    author_email='kashimotoxiang@gmail.com',
     maintainer='kashimotoxiang',
-    maintainer_email='kashimotoxiang@outlook.com',
+    maintainer_email='kashimotoxiang@gmail.com',
     license='MIT',
     packages=find_packages(),
     platforms=["all"],
     url='https://github.com/kashimotoxiang/lyx_lib',
-    # install_requires=[
-    #     'multiprocessing',
-    #     'pickle',
-    # ],
+    install_requires=[
+        'joblib',
+    ],
     classifiers=[
         # How mature is this project? Common values are
         #   3 - Alpha
@@ -40,5 +39,5 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3',
     ],
-    python_requires='>=3',
+    python_requires='>=3.7',
 )

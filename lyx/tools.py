@@ -1,3 +1,31 @@
+import time
+import os
+
+
+def timestamp():
+    return int(time.time())
+
+
+def timeit(f):
+    def timed(*args, **kw):
+        ts = time.time()
+        result = f(*args, **kw)
+        te = time.time()
+        print('func:%r took: %2.4f sec' % (f.__name__, te - ts))
+        return result
+
+    return timed
+
+
+def aria_format(url):
+    path, filename = os.path.split(url)
+
+    path = path.lstrip(r'https://').lstrip(r'http://')
+
+    result = url + '\n dir=' + path + '\n out=' + filename + '\n'
+    return result
+
+
 def log(data, filename, stop=False, table_head=None):
     with open(filename, 'w', encoding='utf-8') as f:
         # write markdown header
